@@ -1,0 +1,196 @@
+<div  class="container-fluid" style="width: 800px">
+   
+    <form [formGroup]="quizForm">
+        <h3>Create a Quiz</h3>
+        <div class="form-group">
+            <label>Quiz Name  </label>
+            <input type="text" id="quiz_name" name="quiz_name" formControlName="quiz_name" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Tags</label>
+            <input type="text"  formControlName="tags" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Activity Points  </label>
+            <input type="text"  formControlName="activity_points" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Duration</label>
+            <input type="text"  formControlName="duration" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Maximum No. of Attempts   </label>
+            <input type="number" min=0 max =10 oninput="validity.valid||(value='');" formControlName="max_no_of_Attempts" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Level Override  </label>
+            <input type="radio" name="level_override" formControlName="level_override" value=1 class="form-control"/>On
+            <input type="radio" name="level_override" formControlName="level_override" value=0 class="form-control"/>Off
+        </div>
+
+        <div class="form-group">
+            <label>slug:</label>
+            <input [disabled]=true type="text" value="http://qa.revature/com/quizzes/"/>
+            <span><input type="text" formControlName="slug" class="form-control"/></span>
+        </div>
+
+        <div class="form-group">
+            <label>Description: </label>
+            <textarea formControlName="description" class="form-control"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Meta Keywords:  </label>
+            <input type="text" formControlName="meta_keywords"class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Meta Description   </label>
+            <input type="text" formControlName="meta_description" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Icon: </label>
+            <input type="file" formControlName="icon" class="form-control"/>
+        </div>
+        
+        <div class="form-group">
+            <label>Instructions:   </label>
+            <input type="text" formControlName="instructions" class="form-control"/>
+        </div>
+
+        <div formGroupName="category">
+            Category: <select  (change)=setCategoryId($event.target.value) id="categoryId" formControlName="categoryId">
+                <option value="" disabled selected>select</option>
+                <option *ngFor="let category of categories" [value]="category.categoryId">{{category.categoryName}}</option>
+              </select>
+        </div> -->
+
+        <div formGroupName="level">
+            Level: <select (change)=setLevelId($event.target.value) id="leveId" formControlName="levelId">
+                <option value="" disabled selected>select</option>
+                <option *ngFor="let level of levels" [value]="level.levelId" >{{level.levelName}}</option>
+              </select>
+        </div>
+
+        <div class="form-group">
+            <label>Pass %:    </label>
+            <input type="text" formConrolName="pass_percentage" class="form-control"/>
+        </div>
+
+        <div class="form-group">
+            <label>Available For:   </label>
+            <input type="checkbox" formConrolName="is_available_pre_signup" class="form-control"/>
+            <input type="checkbox" formConrolName="is_available_via_slug" class="form-control"/>
+            <input type="checkbox" formConrolName="is_available_dashboard" class="form-control"/>
+        </div>
+        
+
+        <fieldset>
+            <legend>Quiz settings</legend>
+            <div class="form-group">
+                <label>Timer Enabled:  </label>
+                <input type="radio" formConrolName="is_timer_enabled" name="is_timer_enabled" class="form-control">Yes
+                <input type="radio" formConrolName="is_timer_enabled"  name="is_timer_enabled" class="form-control">No
+            </div>
+
+            <div class="form-group">
+                <label>Shuffle Questions:  </label>
+                <input type="radio" formConrolName="is_shuffle_questions" name="is_shuffle_questions" class="form-control">Yes
+                <input type="radio" formConrolName="is_shuffle_questions" name="is_shuffle_questions" class="form-control">No
+            </div>
+
+            <div class="form-group">
+                <label>Shuffle Answers:  </label>
+                <input type="radio" formControlNamename="is_shuffle_answers" name="is_shuffle_answers" class="form-control">Yes
+                <input type="radio" formControlNamename="is_shuffle_answers" name="is_shuffle_answers" class="form-control">No
+            </div>
+
+            <div class="form-group">
+                <label>Display Score and Result at the end:  </label>
+                <input type="radio" formControlNamename = "is_display_score" name="is_display_score" class="form-control">Yes
+                <input type="radio" formControlNamename = "is_display_score" name="is_display_score" class="form-control">No
+            </div>
+
+            <div class="form-group">
+                <label>Allow Attempt Review:  </label>
+                <input type="checkbox" formControlName = "is_allow_attempt_review" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Show whether Correct:  </label>
+                <input type="checkbox" formControlName = "is_show_whether_correct" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Show Correct Answers:  </label>
+                <input type="checkbox" formControlName = "is_show_correct_answers_passed" class="form-control">Passed
+                <input type="checkbox" formControlName = "is_show_correct_answers_failed"  class="form-control">Failed
+            </div>
+
+            <div class="form-group">
+                <label>Show Answer Explanations:  </label>
+                <input type="radio" formControlName = "is_show_answer_explanations" name="is_show_answer_explanations"  value = 1 class="form-control">Yes
+                <input type="radio" formControlName = "is_show_answer_explanations" name="is_show_answer_explanations" value = 0 class="form-control">No
+            </div>
+
+            <div class="form-group">
+                <label>Enable Save and Resume:  </label>
+                <input type="checkbox" formControlName = "is_enable_save_resume" class="form-control">
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary" (click) = "getQuestions()">Show Question</button>
+
+        <div >
+            <div formGroupName="pool">
+                Level: <select (change)=setPoolId($event.target.value) id="poolId" formControlName="id">
+                    <option value="" disabled selected>select</option>
+                    <option *ngFor="let pool of pools" [value]="pool.id" >{{pool.poolName}}</option>
+                  </select>
+            </div>
+            <table class="table table-bordered">
+                <thead> <tr>
+                    <th><input type = "checkbox" value = "question.id" ></th>   
+                    <th>Queestion Title</th>
+                    <th>Question Type</th>
+                    <th>Tags</th>
+                    <th>Category</th>
+                    <th>Level</th>
+                </tr></thead>
+                    <tr *ngFor = "let question of questions;"> 
+                    <td>
+                        <input type = "checkbox" (change) = "getCheckBoxValue($event)" [value] = "question.id" id = "questionId">
+                    </td>
+                    <td>
+                       {{question.title}}
+                    </td>
+                    <td>
+                        {{question.questionType.name}}
+                    </td>
+                    <td>
+                        {{question.tags}}
+                    </td>
+                    <td>
+                        {{question.level.levelName}}
+                    </td>
+                    <td>
+                        {{question.category.categoryName}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary" (click) = "addQuestions()">Add Questions</button>
+        <button type="submit" class="btn btn-success" (click) = "save()" style="float: right;">Create Quiz</button>
+    </form>
+    <!-- {{quizForm.value|json}} -->
+    <!-- {{q|json}} -->
+    {{quizquestion|json}}
+</div>
+<!--<div [hidden]="!submitted">
+    <h4>You submitted successfully!</h4>
+</div>-->
